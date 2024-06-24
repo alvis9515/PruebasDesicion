@@ -1,0 +1,22 @@
+---
+- name: Crear archivo en localhost
+  hosts: all
+
+  vars:
+    run: 'pruebas.k3s'
+    
+  tasks:
+    - name: Crear archivo
+      file:
+        path: /tmp/hola.txt
+        state: touch
+        
+    - name: Mostrar la ruta del archivo creado
+      debug:
+        var: item
+      with_items:
+        - "/tmp/hola.txt"
+
+    - name: Listar contenido de /tmp
+      ansible.builtin.shell:
+        cmd: "ls -la /tmp"
