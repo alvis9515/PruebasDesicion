@@ -3,7 +3,7 @@
   hosts: all
 
   vars:
-    run: 'pruebas.k3s'
+    run: 'pruebas.k3s' # declaro la variable para identificar mi playbook y poder hacer la comparacion en el playbook desicion
     
   tasks:
     - name: Crear archivo
