@@ -1,0 +1,24 @@
+---
+- name: Consultar API de Rick and Morty y guardar JSON formateado en archivo
+  hosts: localhost
+  vars:
+    run: 'Disabled'
+  tasks:
+    - name: Realizar solicitud HTTP GET
+      uri:
+        url: https://rickandmortyapi.com/api/character/265
+        return_content: yes
+      register: api_response
+
+    - name: Convertir respuesta JSON a un diccionario
+      set_fact:
+        character_data: "{{ api_response.json }}"
+
+    - name: Generar JSON formateado utilizando plantilla Jinja2
+      template:
+        src: formatted_rick_morty.j2
+        dest: /pruebas/formatted_rick_morty.json
+
+    - name: Mostrar la ruta del archivo guardado
+      debug:
+        msg: "JSON formateado guardado en /pruebas/formatted_rick_morty.json"
