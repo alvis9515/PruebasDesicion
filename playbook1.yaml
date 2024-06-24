@@ -2,7 +2,7 @@
 - name: Consultar API de Rick and Morty y guardar JSON formateado en archivo
   hosts: localhost
   vars:
-    run: 'Disabled'
+    run: 'Disabled' # declaro la variable para identificar mi playbook y poder hacer la comparacion en el playbook desicion
   tasks:
     - name: Realizar solicitud HTTP GET
       uri:
