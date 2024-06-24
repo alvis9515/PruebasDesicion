@@ -1,18 +1,18 @@
 ---
-- name: Obtener el hostname y guardarlo en un archivo local
+- name: Obtener salida de cualquier comando y guardarlo en un archivo local
   hosts: all
   gather_facts: no
   tasks:
-    - name: Obtener el hostname del servidor remoto
+    - name: Obtener  salida de cualquier comando
       command: "{{ comando }}"
-      register: hostname_output
+      register: hostname_output # se guarda en hostname_output
 
-    - name: Mostrar el hostname en la salida
+    - name: Mostrar salida
       debug:
         var: hostname_output.stdout
 
-    - name: Guardar el hostname en un archivo local
+    - name: Guardar salida de cualquier comando en un archivo local
       local_action:
         module: copy
         content: "{{ hostname_output.stdout }}"
-        dest: "/pruebas/{{ inventory_hostname }}_hostname.txt"
+        dest: "/pruebas/{{ inventory_hostname }}_hostname.txt" #aqui utilizo inventory_hostname para que se guarde con el nombre de mi host en el inventario, es algo extra y podrias omitir esa parte
